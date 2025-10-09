@@ -1,0 +1,1 @@
+# Class Food lưu trữ thông tin của món ăn trong hệ thống
