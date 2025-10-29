@@ -1,14 +1,15 @@
 class Employee:
-    def __init__(self, ID=None,EmployeeCode= None, Name = None, Phone=None, Email=None, IsDeleted=None):
+    def __init__(self, ID=None,Code= None, Name = None, Phone=None, Email=None,Password = None, IsDeleted=None):
         self.ID= ID
-        self.EmployeeCode = EmployeeCode
+        self.Code = Code
         self.Name = Name
         self.Phone = Phone
         self.Email = Email
+        self.Password = Password
         self.IsDeleted = IsDeleted
 
     def __str__(self):
-        print("ID:", self.ID)
-        print("Name=", self.Name)
-        print("Phone=", self.Phone)
-        print("Email=", self.Email)
+        info = "{}\t{}\t{}\t{}\t{}\t{}".format(self.ID, self.Name,
+                                               self.Phone, self.Email,
+                                               self.Password, self.IsDeleted)
+        return info

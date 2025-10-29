@@ -1,7 +1,9 @@
-#python -m pip install mysql-connector-python
 import mysql.connector
 import traceback
 import pandas as pd
+import pymysql
+
+
 class Connector:
     def __init__(self,server="localhost", port=3306, database="k23416_retail", username="root", password="@Obama123"):
         self.server=server
@@ -9,9 +11,10 @@ class Connector:
         self.database=database
         self.username=username
         self.password=password
+        self.connect()
     def connect(self):
         try:
-            self.conn = mysql.connector.connect(
+            self.conn = pymysql.connect(
                 host=self.server,
                 port=self.port,
                 database=self.database,
@@ -33,7 +36,9 @@ class Connector:
             cursor.execute(sql)
             df = pd.DataFrame(cursor.fetchall())
             if not df.empty:
-                df.columns=cursor.column_names
+                # SỬA DÒNG NÀY:
+                # df.columns=cursor.column_names  # DÒNG CŨ BỊ LỖI
+                df.columns = [desc[0] for desc in cursor.description]  # DÒNG MỚI ĐÃ SỬA
             return df
         except:
             traceback.print_exc()
@@ -48,13 +53,21 @@ class Connector:
             tablesName.append([tableName for tableName in item][0])
         return tablesName
 
-    def execute_query(self, sql, val=None):
+    def fetchOne(self, sql, var = None):
         try:
             cursor = self.conn.cursor()
-            if val:
-                cursor.execute(sql, val)
-            else:
-                cursor.execute(sql)
+            cursor.execute(sql, var)
+            dataset = cursor.fetchone()
+            cursor.close()
+            return dataset
+        except:
+            traceback.print_exc()
+        return None
+
+    def fetchAll(self, sql, var = None):
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(sql, var)
             dataset = cursor.fetchall()
             cursor.close()
             return dataset
@@ -62,27 +75,28 @@ class Connector:
             traceback.print_exc()
         return None
 
-    def fetchone(self, sql, val=None):
+    def insertOne(self, sql, var = None):
         try:
             cursor = self.conn.cursor()
-            if val:
-                cursor.execute(sql, val)
-            else:
-                cursor.execute(sql)
-            dataset = cursor.fetchone()  # Chỉ lấy 1 bản ghi
+            cursor.execute(sql, var)
+            self.conn.commit()
+            affected_row = cursor.rowcount
             cursor.close()
-            return dataset
+            return affected_row
         except:
             traceback.print_exc()
-        return None
 
-    def fetchall(self, sql, val=None):
+    def executeUpdate(self, sql, var=None):
+        """Thực thi các câu lệnh UPDATE, DELETE và trả về số hàng bị ảnh hưởng"""
         try:
             cursor = self.conn.cursor()
-            cursor.execute(sql, val)
-            dataset = cursor.fetchall()  # Chỉ lấy 1 bản ghi
+            cursor.execute(sql, var)
+            self.conn.commit()
+            affected_row = cursor.rowcount
             cursor.close()
-            return dataset
-        except:
+            return affected_row
+        except Exception as e:
+            self.conn.rollback()
             traceback.print_exc()
-        return None
+            return 0
+
