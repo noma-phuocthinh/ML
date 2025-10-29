@@ -101,7 +101,7 @@ def runKMeans (X, cluster) :
     labels = model. labels_
     centroids = model. cluster_centers_
     y_kmeans = model. fit_predict(X)
-    return y_kmeans, centroids, labels
+    return y_kmeans, centroids, labelsk
 
 X = df2. loc[:, columns]. values
 cluster=4
