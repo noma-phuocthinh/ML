@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>House Pricing Prediction - Faculty of Information Systems</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QFrame" name="top_panel">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>80</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: #01877E;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="title_label">
+         <property name="font">
+          <font>
+           <family>Tahoma</family>
+           <pointsize>18</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: #01877E; color: white;</string>
+         </property>
+         <property name="text">
+          <string>House Pricing Prediction</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="center_panel">
+      <property name="styleSheet">
+       <string notr="true">background-color: white;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QFrame" name="choose_dataset_panel">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: white;</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="dataset_label">
+            <property name="text">
+             <string>Select Dataset:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="choose_dateset_entry">
+            <property name="text">
+             <string>D:\ML\HousingPricePridiction\Data\USA_Housing.csv</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="choose_dataset_button">
+            <property name="styleSheet">
+             <string notr="true">background-color: #FFB0A9; color: #13313D; font-weight: bold;</string>
+            </property>
+            <property name="text">
+             <string>1. Pick Dataset</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="view_dataset_button">
+            <property name="styleSheet">
+             <string notr="true">background-color: #F9D678; color: #13313D; font-weight: bold;</string>
+            </property>
+            <property name="text">
+             <string>2. View Dataset</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="training_rate_panel">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: white;</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="training_rate_label">
+            <property name="text">
+             <string>Training Rate:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="training_rate_entry">
+            <property name="text">
+             <string>80</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="percent_label">
+            <property name="text">
+             <string>%</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="train_model_button">
+            <property name="styleSheet">
+             <string notr="true">background-color: #B6DDDA; color: #13313D; font-weight: bold;</string>
+            </property>
+            <property name="text">
+             <string>3. Train Model</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="evaluate_model_button">
+            <property name="styleSheet">
+             <string notr="true">background-color: #01877E; color: white; font-weight: bold;</string>
+            </property>
+            <property name="text">
+             <string>4. Evaluate Model</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="train_model_result_label">
+            <property name="text">
+             <string>Ready</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="evaluate_panel">
+         <property name="styleSheet">
+          <string notr="true">background-color: white;</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QTableView" name="tree"/>
+          </item>
+          <item>
+           <widget class="QFrame" name="coefficient_panel">
+            <property name="minimumSize">
+             <size>
+              <width>400</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: white;</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <widget class="QLabel" name="coefficient_detail_label">
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Coefficient:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTextEdit" name="coefficient_detail_text"/>
+             </item>
+             <item>
+              <widget class="QFrame" name="metric_panel">
+               <property name="styleSheet">
+                <string notr="true">background-color: white;</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QGridLayout" name="gridLayout">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="mae_label">
+                  <property name="text">
+                   <string>Mean Absolute Error (MAE):</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLineEdit" name="mae_entry">
+                  <property name="text">
+                   <string>0.0</string>
+                  </property>
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="mse_label">
+                  <property name="text">
+                   <string>Mean Square Error (MSE):</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLineEdit" name="mse_entry">
+                  <property name="text">
+                   <string>0.0</string>
+                  </property>
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="rmse_label">
+                  <property name="text">
+                   <string>Root Mean Square Error (RMSE):</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QLineEdit" name="rmse_entry">
+                  <property name="text">
+                   <string>0.0</string>
+                  </property>
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0" colspan="2">
+                 <widget class="QPushButton" name="savemodel_button">
+                  <property name="styleSheet">
+                   <string notr="true">background-color: #13313D; color: white; font-weight: bold;</string>
+                  </property>
+                  <property name="text">
+                   <string>5. Save Model</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="loadmodel_panel">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: white;</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QPushButton" name="loadmodel_button">
+            <property name="styleSheet">
+             <string notr="true">background-color: #FFB0A9; color: #13313D; font-weight: bold;</string>
+            </property>
+            <property name="text">
+             <string>6. Load Model</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="model_option_menu">
+            <item>
+             <property name="text">
+              <string>housing_price_model.pkl</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="input_prediction_panel">
+         <property name="styleSheet">
+          <string notr="true">background-color: white;</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <widget class="QLabel" name="area_income_label">
+            <property name="text">
+             <string>Avg. Area Income:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="area_income_entry">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="area_house_age_label">
+            <property name="text">
+             <string>Avg. Area House Age:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="area_house_age_entry">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="area_number_of_rooms_label">
+            <property name="text">
+             <string>Avg. Area Number of Rooms:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="area_number_of_rooms_entry">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="area_number_of_bedrooms_label">
+            <property name="text">
+             <string>Avg. Area Number of Bedrooms:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="area_number_of_bedrooms_entry">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="area_population_label">
+            <property name="text">
+             <string>Area Population:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="area_population_entry">
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0" colspan="2">
+           <widget class="QPushButton" name="prediction_button">
+            <property name="styleSheet">
+             <string notr="true">background-color: #F9D678; color: #13313D; font-weight: bold;</string>
+            </property>
+            <property name="text">
+             <string>7. Prediction House Pricing</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="prediction_price_label">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Prediction Price:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLineEdit" name="prediction_price_entry">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>0.0</string>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="designedby_panel">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: #13313D;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QLabel" name="designedby_label">
+         <property name="styleSheet">
+          <string notr="true">background-color: #13313D; color: white;</string>
+         </property>
+         <property name="text">
+          <string>Designed by: Tran Duy Thanh</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

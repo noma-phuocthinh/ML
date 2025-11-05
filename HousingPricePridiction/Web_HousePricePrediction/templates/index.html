@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            background-color: #e8f5e8;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>House Price Prediction</h2>
+        <form id="predictionForm">
+            <table>
+                <tr>
+                    <td>Avg. Area Income:</td>
+                    <td><input type="text" name="area_income_value" id="area_income_value" placeholder="e.g., 79545.45" /></td>
+                </tr>
+                <tr>
+                    <td>Avg. Area House Age:</td>
+                    <td><input type="text" name="area_house_age_value" id="area_house_age_value" placeholder="e.g., 5.68" /></td>
+                </tr>
+                <tr>
+                    <td>Avg. Area Number of Rooms:</td>
+                    <td><input type="text" name="area_number_of_rooms_value" id="area_number_of_rooms_value" placeholder="e.g., 7.00" /></td>
+                </tr>
+                <tr>
+                    <td>Avg. Area Number of Bedrooms:</td>
+                    <td><input type="text" name="area_number_of_bedrooms_value" id="area_number_of_bedrooms_value" placeholder="e.g., 4.09" /></td>
+                </tr>
+                <tr>
+                    <td>Area Population:</td>
+                    <td><input type="text" name="area_population_value" id="area_population_value" placeholder="e.g., 23086.80" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button id="doprediction_button" type="button">Predict Price</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Predicted House Price ($):</td>
+                    <td class="result"><input type="text" name="house_price" id="house_price" readonly /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <script>
+        $(function(){
+            $('#doprediction_button').click(function(){
+                // Validate input
+                const inputs = [
+                    'area_income_value',
+                    'area_house_age_value',
+                    'area_number_of_rooms_value',
+                    'area_number_of_bedrooms_value',
+                    'area_population_value'
+                ];
+
+                let isValid = true;
+                inputs.forEach(inputId => {
+                    const value = $('#' + inputId).val();
+                    if (!value || isNaN(value)) {
+                        alert(`Please enter a valid number for ${$('#' + inputId).closest('td').prev().text().trim()}`);
+                        isValid = false;
+                        return false;
+                    }
+                });
+
+                if (!isValid) return;
+
+                // Show loading
+                $('#house_price').val('Predicting...');
+
+                $.ajax({
+                    url: '/doprediction',
+                    data: $('#predictionForm').serialize(),
+                    type: 'POST',
+                    success: function(response){
+                        console.log(response);
+                        $('#house_price').val('$' + response);
+                    },
+                    error: function(xhr, status, error){
+                        console.log(error);
+                        let errorMsg = 'Error occurred during prediction';
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            errorMsg = xhr.responseJSON.error;
+                        }
+                        $('#house_price').val(errorMsg);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
