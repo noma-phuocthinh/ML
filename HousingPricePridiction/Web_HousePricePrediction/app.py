@@ -7,6 +7,7 @@ import traceback
 app = Flask(__name__)
 
 
+
 def load_model():
     model_path = "D:/ML/HousingPricePridiction/models/housing_price_model.pkl"
     try:
